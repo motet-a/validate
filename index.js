@@ -1,5 +1,4 @@
 
-const _ = require('lodash')
 const assert = require('assert')
 
 const { getType, getPreciseType, mapValues, pickBy } = require('./util')
@@ -394,7 +393,7 @@ class ObjectValidator extends Validator {
 
     of(validator) {
         return this.compose(
-            object => _.mapValues(
+            object => mapValues(
                 object,
                 (value, key) => ValidationError.catchAndPushProp(
                     () => validator(value),
