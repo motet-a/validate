@@ -1,0 +1,17 @@
+{
+  "name": "validate",
+  "version": "0.0.1",
+  "private": true,
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "nyc mocha index.test.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.3.0",
+    "nyc": "^10.3.0"
+  }
+}
