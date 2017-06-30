@@ -9,7 +9,7 @@
     "test:src": "nyc mocha --compilers js:babel-register src/index.test.js",
     "test": "npm run test:src && npm run test:examples",
     "test:examples": "node examples/0.js",
-    "prepublish": "build"
+    "prepublish": "npm run build"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
