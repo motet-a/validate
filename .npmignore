@@ -1,3 +1,4 @@
 /src/
 /coverage/
+/examples/
 .nyc_output/
