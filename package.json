@@ -2,14 +2,17 @@
   "name": "@motet_a/validate",
   "version": "0.0.1",
   "private": true,
-  "main": "index.js",
+  "main": "dist/index.js",
   "license": "BSD-3-Clause",
   "scripts": {
-    "test": "nyc mocha index.test.js && npm run test:examples",
+    "build": "babel src/ --out-dir dist/",
+    "test": "nyc mocha src/index.test.js && npm run test:examples",
     "test:examples": "node examples/0.js"
   },
-  "dependencies": {},
   "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2016": "^6.24.1",
+    "babel-preset-es2017": "^6.24.1"
     "chai": "^3.5.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.3.0",
