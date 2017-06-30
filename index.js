@@ -241,6 +241,13 @@ class StringValidator extends Validator {
         return this.assert(s => regexp.exec(s))
     }
 
+    assertEveryChar(shouldReturnSomethingTruthy) {
+        return this.assert(
+            s => s.split('')
+                  .every(shouldReturnSomethingTruthy)
+        )
+    }
+
     get email() {
         return this.regexp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
     }
@@ -405,6 +412,14 @@ class ObjectValidator extends Validator {
 }
 
 class ArrayValidator extends Validator {
+    min(min) {
+        return this.assert(a => a.length >= min)
+    }
+
+    max(max) {
+        return this.assert(a => a.length <= max)
+    }
+
     of(validator) {
         return this.compose(
             array => array.map(

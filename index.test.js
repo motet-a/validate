@@ -139,6 +139,19 @@ describe('validate()', () => {
         )
     })
 
+    it('allows to ensure that every character match a predicate', () => {
+        const onlyAs = V.string.assertEveryChar(c => c === 'a')
+
+        assert(('') === '')
+        assert(onlyAs('aaa') === 'aaa')
+        assert.throws(
+            () => onlyAs('aab')
+        )
+        assert.throws(
+            () => onlyAs('b')
+        )
+    })
+
     it('requires numbers', () => {
         assert(V.number(123) === 123)
 
@@ -493,6 +506,28 @@ describe('validate()', () => {
                 'Required value at `2`, got `undefined`'
             )
         })
+    })
+
+    it('allows to restrict the length of an array', () => {
+        const mustContain3Or4Items = V.array.min(3).max(4)
+
+        assert.deepEqual(
+            mustContain3Or4Items([1, 2, 3]),
+            [1, 2, 3]
+        )
+
+        assert.deepEqual(
+            mustContain3Or4Items([1, 2, 3, 4]),
+            [1, 2, 3, 4]
+        )
+
+        assert.throws(
+            () => mustContain3Or4Items([1, 2])
+        )
+
+        assert.throws(
+            () => mustContain3Or4Items([1, 2, 3, 4, 5])
+        )
     })
 
     describe('object.of', () => {

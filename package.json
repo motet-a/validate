@@ -1,11 +1,12 @@
 {
-  "name": "validate",
+  "name": "@motet_a/validate",
   "version": "0.0.1",
   "private": true,
   "main": "index.js",
-  "license": "MIT",
+  "license": "BSD-3-Clause",
   "scripts": {
-    "test": "nyc mocha index.test.js"
+    "test": "nyc mocha index.test.js && npm run test:examples",
+    "test:examples": "node examples/0.js"
   },
   "dependencies": {},
   "devDependencies": {
