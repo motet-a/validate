@@ -1,4 +1,6 @@
 
+[![Build Status](https://travis-ci.org/motet-a/validate.svg?branch=master)](https://travis-ci.org/motet-a/validate) [![Coverage Status](https://coveralls.io/repos/github/motet-a/validate/badge.svg?branch=master)](https://coveralls.io/github/motet-a/validate?branch=master)
+
 # Data validation for Node.js
 
 ## Oh no, yet another validation library, there are thousands…
