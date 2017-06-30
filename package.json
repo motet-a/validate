@@ -1,6 +1,6 @@
 {
   "name": "@motet_a/validate",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "dist/index.js",
   "license": "BSD-3-Clause",
   "engines": {
@@ -12,7 +12,7 @@
     "test:src": "nyc mocha --compilers js:babel-register src/index.test.js",
     "test": "npm run test:src && npm run test:examples",
     "test:examples": "node examples/0.js",
-    "prepublish": "npm run build",
+    "prepare": "npm run build",
     "report-coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "devDependencies": {
