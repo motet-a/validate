@@ -19,7 +19,7 @@ using modern JS features.
 
 ## Drawbacks
 
-Since it uses `Reflect` and `Proxy`, it is hard to use it in a browser.
+Since it uses `Reflect`, it is hard to use it in old environments.
 
 ## How-to
 
