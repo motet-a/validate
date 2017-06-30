@@ -4,6 +4,7 @@
   "main": "dist/index.js",
   "license": "BSD-3-Clause",
   "engines": { "node": ">=6" },
+  "repository": "github:motet-a/validate",
   "scripts": {
     "build": "babel src/ --out-dir dist/ --ignore '*.test.js'",
     "test:src": "nyc mocha --compilers js:babel-register src/index.test.js",
