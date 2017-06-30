@@ -1,7 +1,7 @@
 
 const assert = require('assert')
 
-const renderMessage = (messageTemplate, path = []) => {
+const renderMessage = (messageTemplate, path) => {
     if (typeof messageTemplate === 'string') {
         return messageTemplate
     }

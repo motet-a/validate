@@ -92,6 +92,10 @@ class Validator {
         return this.assertType('function')
     }
 
+    get boolean() {
+        return this.assertType('boolean')
+    }
+
     shape(shape) {
         return this.object.shape(shape)
     }

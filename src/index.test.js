@@ -230,6 +230,15 @@ describe('validate()', () => {
         )
     })
 
+    it('requires booleans', () => {
+        assert(V.boolean(true) === true)
+        assert(V.boolean(false) === false)
+        assert.throws(
+            () => V.boolean(0),
+            'The value must be a `boolean`, got a `number`'
+        )
+    })
+
     it('requires functions', () => {
         const someFunc = () => {}
 
