@@ -2,7 +2,7 @@
 const assert = require('assert')
 
 const { getType, getPreciseType, mapValues, pickBy } = require('./util')
-const { ValidationError, makeError } = require('./error')
+const ValidationError = require('./error')
 
 function makeValidator(Class, ...args) {
     assert(typeof Class === 'function')
@@ -99,7 +99,7 @@ class Validator {
     assert(shouldReturnSomethingTruthy) {
         return this.compose(value => {
             if (!shouldReturnSomethingTruthy(value)) {
-                throw makeError(
+                throw new ValidationError(
                     name => 'Assertion failure, the ' + name +
                           ' was `' + value + '`'
                 )
@@ -136,7 +136,7 @@ class Validator {
                 throw lastError
             }
 
-            throw makeError(
+            throw new ValidationError(
                 name => 'The ' + name + " doesn't match"
             )
         })
@@ -152,7 +152,7 @@ class Validator {
     assertType(name) {
         return this.compose(v => {
             if (getType(v) !== name) {
-                throw makeError(
+                throw new ValidationError(
                     vn => 'The ' + vn + ' must be a `' +
                         name + '`, got a `' + getPreciseType(v) + '`'
                 )
@@ -168,7 +168,7 @@ class Validator {
                 // Don't run other validators in this case, they could fail.
                 return value
             } else {
-                throw makeError(
+                throw new ValidationError(
                     name => 'Required ' + name + ', got `' + value + '`'
                 )
             }
@@ -282,7 +282,7 @@ class NumberValidator extends Validator {
         if (!isNaN(value) &&
             !isFinite(value) &&
             !this._options.allowInfinity) {
-            throw makeError(
+            throw new ValidationError(
                 vn => 'The ' + vn + ' must be finite'
             )
         }

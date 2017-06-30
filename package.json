@@ -1,18 +1,21 @@
 {
   "name": "@motet_a/validate",
   "version": "0.0.1",
-  "private": true,
   "main": "dist/index.js",
   "license": "BSD-3-Clause",
+  "engines": { "node": ">=6" },
   "scripts": {
-    "build": "babel src/ --out-dir dist/",
-    "test": "nyc mocha src/index.test.js && npm run test:examples",
-    "test:examples": "node examples/0.js"
+    "build": "babel src/ --out-dir dist/ --ignore '*.test.js'",
+    "test:src": "nyc mocha --compilers js:babel-register src/index.test.js",
+    "test": "npm run test:src && npm run test:examples",
+    "test:examples": "node examples/0.js",
+    "prepublish": "build"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-preset-es2016": "^6.24.1",
-    "babel-preset-es2017": "^6.24.1"
+    "babel-preset-es2017": "^6.24.1",
+    "babel-register": "^6.24.1",
     "chai": "^3.5.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.3.0",

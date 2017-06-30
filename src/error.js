@@ -1,38 +1,44 @@
 
-const PATH = Symbol()
-const MESSAGE = Symbol()
+const assert = require('assert')
 
-// Don't instanciate directly
+const renderMessage = (messageTemplate, path = []) => {
+    if (typeof messageTemplate === 'string') {
+        return messageTemplate
+    }
+
+    assert(typeof messageTemplate === 'function')
+
+    const valueName = path.length ? (
+        'value at `' + path.join('.') + '`'
+    ) : (
+        'value'
+    )
+
+    return messageTemplate(valueName)
+}
+
 class ValidationError extends Error {
-    pushProp(name) {
-        this[PATH].unshift(name)
-    }
+    constructor(messageTemplate, path = []) {
+        const message = renderMessage(messageTemplate, path)
+        super(message)
 
-    getNewStack(oldStack) {
-        const withoutFirstLine = oldStack.split('\n')
-                                         .slice(1)
-                                         .join('\n')
+        this.name = this.constructor.name
 
-        return 'Error: ' + this.newMessage + '\n' +
-               withoutFirstLine
-    }
+        this.messageTemplate = messageTemplate
+        this.path = path
 
-    get path() {
-        return this[PATH].slice()
-    }
-
-    get newMessage() {
-        if (typeof this[MESSAGE] === 'string') {
-            return this[MESSAGE]
+        if (typeof Error.captureStackTrace === 'function') {
+            Error.captureStackTrace(this, this.constructor)
+        } else {
+            this.stack = (new Error(message)).stack
         }
+    }
 
-        const valueName = this.path.length ? (
-            'value at `' + this.path.join('.') + '`'
-        ) : (
-            'value'
+    pushProp(name) {
+        return new ValidationError(
+            this.messageTemplate,
+            [name].concat(this.path),
         )
-
-        return this[MESSAGE](valueName)
     }
 }
 
@@ -41,39 +47,11 @@ ValidationError.catchAndPushProp = (func, propName) => {
         return func()
     } catch (error) {
         if (error instanceof ValidationError) {
-            error.pushProp(propName)
+            error = error.pushProp(propName)
         }
 
         throw error
     }
 }
 
-function makeError(message) {
-    const error = new Proxy(
-        new ValidationError('ValidationError'),
-
-        {
-            get(target, prop, receiver) {
-                if (prop === 'message') {
-                    return Reflect.get(target, 'newMessage', receiver)
-                }
-
-                if (prop === 'stack') {
-                    const oldStack = Reflect.get(target, 'stack', receiver)
-                    return target.getNewStack.bind(receiver)(oldStack)
-                }
-
-                return Reflect.get(target, prop, receiver)
-            },
-        }
-    )
-
-    error[PATH] = []
-    error[MESSAGE] = message
-    return error
-}
-
-module.exports = {
-    makeError,
-    ValidationError,
-}
+module.exports = ValidationError

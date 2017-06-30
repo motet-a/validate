@@ -1,6 +1,6 @@
 
 const { assert } = require('chai')
-const V = require('.')
+const V = require('./index')
 
 describe('validate()', () => {
     it('requires values by default', () => {
@@ -615,8 +615,8 @@ describe('validate()', () => {
             assert(e instanceof V.ValidationError)
             assert(e.message === 'The value at `users.1.books.0` must ' +
                                  'be a `string`, got a `number`')
-            assert(e.toString() === 'Error: ' + e.message)
-            assert(e.stack.startsWith(e.toString()))
+            assert(e.toString() === 'ValidationError: ' + e.message)
+            assert(e.stack.startsWith(e.message))
         }
 
     })
