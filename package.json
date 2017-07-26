@@ -1,7 +1,10 @@
 {
-  "name": "@motet_a/validate",
-  "version": "0.0.3",
+  "name": "@motet-a/validate",
+  "version": "0.1.0",
   "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "license": "BSD-3-Clause",
   "engines": {
     "node": ">=6"

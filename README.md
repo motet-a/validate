@@ -28,7 +28,7 @@ Since it uses `Reflect`, it is hard to use it in old environments.
 First of all:
 
 ```js
-const V = require('@motet_a/validate')
+const V = require('@motet-a/validate')
 ```
 
 `V` is a validation function which returns its argument, requires
