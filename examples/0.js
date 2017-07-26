@@ -1,6 +1,6 @@
 
 const assert = require('assert')
-const V = require('..')
+const V = require('../')
 
 const isPhoneNumberChar = c =>
     !!/[a-z0-9+ ]/i.exec(c)
