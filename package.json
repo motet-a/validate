@@ -12,6 +12,7 @@
   "repository": "github:motet-a/validate",
   "scripts": {
     "build": "babel src/ --out-dir dist/ --ignore '*.test.js'",
+    "pretest": "npm run build",
     "test:src": "nyc mocha --compilers js:babel-register src/index.test.js",
     "test": "npm run test:src && npm run test:examples",
     "test:examples": "node examples/0.js",
