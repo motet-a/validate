@@ -13,21 +13,21 @@
   "scripts": {
     "build": "babel src/ --out-dir dist/ --ignore '*.test.js'",
     "pretest": "npm run build",
-    "test:src": "nyc mocha --compilers js:babel-register src/index.test.js",
+    "test:src": "nyc mocha --require babel-core/register src/index.test.js",
     "test": "npm run test:src && npm run test:examples",
     "test:examples": "node examples/0.js",
     "prepare": "npm run build",
     "report-coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
+    "babel-cli": "^6.26.0",
     "babel-preset-es2016": "^6.24.1",
     "babel-preset-es2017": "^6.24.1",
-    "babel-register": "^6.24.1",
-    "chai": "^3.5.0",
-    "coveralls": "^2.13.1",
+    "babel-register": "^6.26.0",
+    "chai": "^4.1.2",
+    "coveralls": "^3.0.0",
     "istanbul": "^0.4.5",
-    "mocha": "^3.3.0",
-    "nyc": "^10.3.0"
+    "mocha": "^4.0.1",
+    "nyc": "^11.4.0"
   }
 }
